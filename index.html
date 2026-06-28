@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{margin:0;background:#FFFFFF;color:#0F172A;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  input,textarea,select{font-family:inherit}
+  ::selection{background:#1D4ED8;color:#fff}
+  @media (max-width:880px){
+    [data-desktop-nav]{display:none !important}
+    [data-nav-toggle]{display:inline-flex !important}
+  }
+  @media (min-width:881px){
+    [data-nav-toggle]{display:none !important}
+    [data-mobile-menu]{display:none !important}
+  }
+</style>
+</helmet>
+<div style="background:#FFFFFF;color:#0F172A">
+
+  <!-- NAV -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid #E5E7EB">
+    <div style="max-width:1220px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between">
+      <a href="#top" style="display:flex;align-items:center;gap:11px">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 4 L28 28 L4 28 Z" stroke="#1D4ED8" stroke-width="2.1" stroke-linejoin="round"/>
+          <path d="M10.5 28 L16 16 L21.5 28" stroke="#1D4ED8" stroke-width="2.1" stroke-linejoin="round"/>
+        </svg>
+        <span style="font-size:19px;letter-spacing:-0.015em"><strong style="font-weight:700">Atlas</strong><span style="font-weight:400;color:#64748B"> Legal</span></span>
+      </a>
+      <div data-desktop-nav style="display:flex;align-items:center;gap:34px">
+        <a href="#practice" style="font-size:15px;font-weight:500;color:#334155;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s ease,color .2s ease" style-hover="color:#0F172A;border-color:#0F172A">Áreas</a>
+        <a href="#attorneys" style="font-size:15px;font-weight:500;color:#334155;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s ease,color .2s ease" style-hover="color:#0F172A;border-color:#0F172A">Equipo</a>
+        <a href="#results" style="font-size:15px;font-weight:500;color:#334155;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s ease,color .2s ease" style-hover="color:#0F172A;border-color:#0F172A">Resultados</a>
+        <a href="#process" style="font-size:15px;font-weight:500;color:#334155;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s ease,color .2s ease" style-hover="color:#0F172A;border-color:#0F172A">Proceso</a>
+        <a href="#contact" style="font-size:15px;font-weight:600;color:#fff;background:#1D4ED8;padding:9px 20px;border-radius:999px;transition:background .2s ease" style-hover="background:#1E40AF">Agendar consulta</a>
+      </div>
+      <button data-nav-toggle onClick="{{ toggleMenu }}" aria-label="Menú" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #E5E7EB;border-radius:10px;background:#fff">
+        <i data-lucide="menu" style="width:20px;height:20px;color:#0F172A"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-mobile-menu style="position:fixed;inset:72px 0 0 0;z-index:49;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+      <a href="#practice" onClick="{{ closeMenu }}" style="font-size:22px;font-weight:600;padding:16px 0;border-bottom:1px solid #E5E7EB">Áreas de práctica</a>
+      <a href="#attorneys" onClick="{{ closeMenu }}" style="font-size:22px;font-weight:600;padding:16px 0;border-bottom:1px solid #E5E7EB">Equipo</a>
+      <a href="#results" onClick="{{ closeMenu }}" style="font-size:22px;font-weight:600;padding:16px 0;border-bottom:1px solid #E5E7EB">Resultados</a>
+      <a href="#process" onClick="{{ closeMenu }}" style="font-size:22px;font-weight:600;padding:16px 0;border-bottom:1px solid #E5E7EB">Proceso</a>
+      <a href="#contact" onClick="{{ closeMenu }}" style="margin-top:18px;text-align:center;font-size:17px;font-weight:600;color:#fff;background:#1D4ED8;padding:15px;border-radius:999px">Agendar consulta</a>
+    </div>
+  </sc-if>
+
+  <!-- HERO -->
+  <header id="top" data-screen-label="Hero" style="border-bottom:1px solid #E5E7EB">
+    <div style="max-width:1080px;margin:0 auto;padding:clamp(72px,11vw,128px) 24px clamp(48px,7vw,80px);text-align:center">
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)">
+        <p style="font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#1D4ED8;margin:0 0 26px">Estudio jurídico · Desde 1998</p>
+        <h1 style="font-size:clamp(42px,8vw,92px);line-height:1.02;font-weight:700;letter-spacing:-0.035em;margin:0;color:#0F172A">Precisión legal.<br>Resultados decisivos.</h1>
+        <p style="max-width:600px;margin:30px auto 0;font-size:clamp(17px,2.2vw,21px);line-height:1.6;color:#475569;font-weight:400">Atlas Legal acompaña a empresas y personas en los asuntos que definen su futuro. Estrategia rigurosa, ejecución impecable, criterio absoluto.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;margin-top:40px">
+          <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:#fff;background:#1D4ED8;padding:14px 28px;border-radius:999px;transition:background .2s ease" style-hover="background:#1E40AF">Agendar consulta</a>
+          <a href="#attorneys" style="display:inline-flex;align-items:center;gap:7px;font-size:16px;font-weight:600;color:#1D4ED8;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s ease" style-hover="border-color:#1D4ED8">Conocer al equipo <i data-lucide="arrow-right" style="width:17px;height:17px"></i></a>
+        </div>
+      </div>
+    </div>
+    <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)">
+      <div style="max-width:1400px;margin:0 auto;padding:0 24px">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80" alt="Sede de Atlas Legal" loading="lazy" style="width:100%;height:clamp(320px,52vw,620px);object-fit:cover;object-position:center;border-radius:18px;filter:grayscale(1) contrast(1.04)">
+        <p style="font-size:13px;color:#94A3B8;margin:14px 2px 0;letter-spacing:0.01em">Sede central — Paseo de la Castellana, Madrid.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRACTICE AREAS -->
+  <section id="practice" data-screen-label="Practice Areas" style="border-bottom:1px solid #E5E7EB">
+    <div style="max-width:1220px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px">
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);max-width:680px">
+        <p style="font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#1D4ED8;margin:0 0 18px">Áreas de práctica</p>
+        <h2 style="font-size:clamp(30px,5vw,54px);line-height:1.06;font-weight:600;letter-spacing:-0.025em;margin:0;color:#0F172A">Cobertura legal integral.</h2>
+        <p style="margin:22px 0 0;font-size:18px;line-height:1.65;color:#475569">Equipos especializados que trabajan de forma coordinada para resolver los asuntos más exigentes con una sola interlocución.</p>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <div style="border:1px solid #E5E7EB;border-radius:16px;padding:34px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,23,42,0.28);border-color:#CBD5E1">
+          <div style="width:50px;height:50px;border-radius:12px;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><i data-lucide="building-2" style="width:24px;height:24px;color:#1D4ED8"></i></div>
+          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Derecho Corporativo</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Constitución, gobernanza y operación de sociedades con visión de largo plazo.</p>
+        </div>
+        <div style="border:1px solid #E5E7EB;border-radius:16px;padding:34px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,23,42,0.28);border-color:#CBD5E1">
+          <div style="width:50px;height:50px;border-radius:12px;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><i data-lucide="scale" style="width:24px;height:24px;color:#1D4ED8"></i></div>
+          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Litigios y Arbitraje</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Representación firme ante tribunales y cortes arbitrales nacionales e internacionales.</p>
+        </div>
+        <div style="border:1px solid #E5E7EB;border-radius:16px;padding:34px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,23,42,0.28);border-color:#CBD5E1">
+          <div style="width:50px;height:50px;border-radius:12px;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><i data-lucide="handshake" style="width:24px;height:24px;color:#1D4ED8"></i></div>
+          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Fusiones y Adquisiciones</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Estructuración, due diligence y cierre de transacciones complejas con discreción total.</p>
+        </div>
+        <div style="border:1px solid #E5E7EB;border-radius:16px;padding:34px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,23,42,0.28);border-color:#CBD5E1">
+          <div style="width:50px;height:50px;border-radius:12px;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><i data-lucide="lightbulb" style="width:24px;height:24px;color:#1D4ED8"></i></div>
+          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Propiedad Intelectual</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Protección y defensa de marcas, patentes y activos intangibles de alto valor.</p>
+        </div>
+        <div style="border:1px solid #E5E7EB;border-radius:16px;padding:34px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,23,42,0.28);border-color:#CBD5E1">
+          <div style="width:50px;height:50px;border-radius:12px;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><i data-lucide="briefcase" style="width:24px;height:24px;color:#1D4ED8"></i></div>
+          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Derecho Laboral</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Asesoría preventiva y contenciosa en relaciones de trabajo y reestructuraciones.</p>
+        </div>
+        <div style="border:1px solid #E5E7EB;border-radius:16px;padding:34px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,23,42,0.28);border-color:#CBD5E1">
+          <div style="width:50px;height:50px;border-radius:12px;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><i data-lucide="landmark" style="width:24px;height:24px;color:#1D4ED8"></i></div>
+          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Derecho Inmobiliario</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Desarrollo, financiamiento y litigio de proyectos inmobiliarios e infraestructura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATTORNEYS -->
+  <section id="attorneys" data-screen-label="Attorneys" style="border-bottom:1px solid #E5E7EB">
+    <div style="max-width:1220px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px">
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);max-width:680px">
+        <p style="font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#1D4ED8;margin:0 0 18px">Equipo</p>
+        <h2 style="font-size:clamp(30px,5vw,54px);line-height:1.06;font-weight:600;letter-spacing:-0.025em;margin:0;color:#0F172A">Abogados de referencia.</h2>
+        <p style="margin:22px 0 0;font-size:18px;line-height:1.65;color:#475569">Socios con trayectoria internacional y un compromiso absoluto con cada cliente.</p>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px">
+        <div style="transition:transform .25s ease" style-hover="transform:translateY(-5px)">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Eleanor Vance" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;filter:grayscale(1) contrast(1.03)">
+          <h3 style="font-size:19px;font-weight:600;letter-spacing:-0.01em;margin:18px 0 4px">Eleanor Vance</h3>
+          <p style="font-size:14px;color:#1D4ED8;font-weight:600;margin:0 0 3px">Socia Directora</p>
+          <p style="font-size:14px;color:#94A3B8;margin:0">Corporativo · M&amp;A</p>
+        </div>
+        <div style="transition:transform .25s ease" style-hover="transform:translateY(-5px)">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Marcus Holloway" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;filter:grayscale(1) contrast(1.03)">
+          <h3 style="font-size:19px;font-weight:600;letter-spacing:-0.01em;margin:18px 0 4px">Marcus Holloway</h3>
+          <p style="font-size:14px;color:#1D4ED8;font-weight:600;margin:0 0 3px">Socio</p>
+          <p style="font-size:14px;color:#94A3B8;margin:0">Litigios y Arbitraje</p>
+        </div>
+        <div style="transition:transform .25s ease" style-hover="transform:translateY(-5px)">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Daniel Krause" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;filter:grayscale(1) contrast(1.03)">
+          <h3 style="font-size:19px;font-weight:600;letter-spacing:-0.01em;margin:18px 0 4px">Daniel Krause</h3>
+          <p style="font-size:14px;color:#1D4ED8;font-weight:600;margin:0 0 3px">Socio</p>
+          <p style="font-size:14px;color:#94A3B8;margin:0">Derecho Inmobiliario</p>
+        </div>
+        <div style="transition:transform .25s ease" style-hover="transform:translateY(-5px)">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="Sofía Reyes" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;filter:grayscale(1) contrast(1.03)">
+          <h3 style="font-size:19px;font-weight:600;letter-spacing:-0.01em;margin:18px 0 4px">Sofía Reyes</h3>
+          <p style="font-size:14px;color:#1D4ED8;font-weight:600;margin:0 0 3px">Socia</p>
+          <p style="font-size:14px;color:#94A3B8;margin:0">Propiedad Intelectual</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" data-screen-label="Results" style="position:relative;background:#0F172A;overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80" alt="" aria-hidden="true" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0.16">
+    <div style="position:relative;max-width:1220px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px">
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);max-width:680px">
+        <p style="font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#93B4FF;margin:0 0 18px">Resultados</p>
+        <h2 style="font-size:clamp(30px,5vw,54px);line-height:1.06;font-weight:600;letter-spacing:-0.025em;margin:0;color:#fff">El historial habla por nosotros.</h2>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);margin-top:60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:48px 32px">
+        <div>
+          <div style="font-size:clamp(48px,7vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:1;color:#fff">25<span style="color:#93B4FF">+</span></div>
+          <p style="margin:14px 0 0;font-size:15px;color:#94A3B8;line-height:1.5">Años de trayectoria continua</p>
+        </div>
+        <div>
+          <div style="font-size:clamp(48px,7vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:1;color:#fff">1.200<span style="color:#93B4FF">+</span></div>
+          <p style="margin:14px 0 0;font-size:15px;color:#94A3B8;line-height:1.5">Casos y operaciones resueltos</p>
+        </div>
+        <div>
+          <div style="font-size:clamp(48px,7vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:1;color:#fff">98<span style="color:#93B4FF">%</span></div>
+          <p style="margin:14px 0 0;font-size:15px;color:#94A3B8;line-height:1.5">Tasa de éxito en litigio</p>
+        </div>
+        <div>
+          <div style="font-size:clamp(48px,7vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:1;color:#fff">€3.2B</div>
+          <p style="margin:14px 0 0;font-size:15px;color:#94A3B8;line-height:1.5">En transacciones asesoradas</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" data-screen-label="Process" style="border-bottom:1px solid #E5E7EB">
+    <div style="max-width:1220px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px">
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);max-width:680px">
+        <p style="font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#1D4ED8;margin:0 0 18px">Proceso</p>
+        <h2 style="font-size:clamp(30px,5vw,54px);line-height:1.06;font-weight:600;letter-spacing:-0.025em;margin:0;color:#0F172A">Cómo trabajamos.</h2>
+        <p style="margin:22px 0 0;font-size:18px;line-height:1.65;color:#475569">Un método claro, predecible y transparente de principio a fin.</p>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0">
+        <div style="padding:32px 28px 32px 0;border-top:2px solid #0F172A">
+          <div style="font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:0.05em;margin-bottom:18px">01</div>
+          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Consulta</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Escuchamos tu situación y definimos objetivos con total claridad.</p>
+        </div>
+        <div style="padding:32px 28px;border-top:2px solid #0F172A">
+          <div style="font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:0.05em;margin-bottom:18px">02</div>
+          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Estrategia</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Diseñamos un plan jurídico a medida, con riesgos y tiempos transparentes.</p>
+        </div>
+        <div style="padding:32px 28px;border-top:2px solid #0F172A">
+          <div style="font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:0.05em;margin-bottom:18px">03</div>
+          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Ejecución</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Actuamos con rigor en cada gestión, negociación o instancia judicial.</p>
+        </div>
+        <div style="padding:32px 0 32px 28px;border-top:2px solid #0F172A">
+          <div style="font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:0.05em;margin-bottom:18px">04</div>
+          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px">Resolución</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:#64748B;margin:0">Llegamos al resultado acordado y acompañamos lo que viene después.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" data-screen-label="Contact" style="border-bottom:1px solid #E5E7EB">
+    <div style="max-width:1220px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(48px,7vw,96px)">
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)">
+        <p style="font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#1D4ED8;margin:0 0 18px">Contacto</p>
+        <h2 style="font-size:clamp(30px,5vw,54px);line-height:1.06;font-weight:600;letter-spacing:-0.025em;margin:0;color:#0F172A">Hablemos.</h2>
+        <p style="margin:22px 0 40px;font-size:18px;line-height:1.65;color:#475569;max-width:420px">La primera consulta es confidencial y sin compromiso. Cuéntanos tu caso y un socio te responderá en menos de 24 horas.</p>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <i data-lucide="mail" style="width:20px;height:20px;color:#1D4ED8"></i>
+            <a href="mailto:contacto@atlaslegal.com" style="font-size:16px;font-weight:500;border-bottom:1px solid transparent;transition:border-color .2s ease" style-hover="border-color:#0F172A">contacto@atlaslegal.com</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <i data-lucide="phone" style="width:20px;height:20px;color:#1D4ED8"></i>
+            <a href="tel:+34910000000" style="font-size:16px;font-weight:500;border-bottom:1px solid transparent;transition:border-color .2s ease" style-hover="border-color:#0F172A">+34 910 000 000</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <i data-lucide="map-pin" style="width:20px;height:20px;color:#1D4ED8"></i>
+            <span style="font-size:16px;font-weight:500;color:#334155">Madrid · Ciudad de México · Buenos Aires</span>
+          </div>
+        </div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)">
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid #E5E7EB;border-radius:18px;padding:48px 36px;text-align:center;background:#fff">
+            <div style="width:56px;height:56px;border-radius:50%;background:#EFF4FF;display:flex;align-items:center;justify-content:center;margin:0 auto 22px"><i data-lucide="check" style="width:28px;height:28px;color:#1D4ED8"></i></div>
+            <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.02em;margin:0 0 10px">Mensaje recibido</h3>
+            <p style="font-size:16px;color:#64748B;line-height:1.6;margin:0">Gracias por confiar en Atlas Legal. Un socio se pondrá en contacto contigo en breve.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:26px">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin-bottom:8px">Nombre completo</label>
+              <input type="text" required placeholder="Tu nombre" style="width:100%;border:none;border-bottom:1px solid #E5E7EB;background:transparent;padding:12px 0;font-size:17px;color:#0F172A;outline:none;transition:border-color .2s ease" style-focus="border-color:#1D4ED8">
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin-bottom:8px">Correo electrónico</label>
+              <input type="email" required placeholder="tu@empresa.com" style="width:100%;border:none;border-bottom:1px solid #E5E7EB;background:transparent;padding:12px 0;font-size:17px;color:#0F172A;outline:none;transition:border-color .2s ease" style-focus="border-color:#1D4ED8">
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin-bottom:8px">Área de interés</label>
+              <select required style="width:100%;border:none;border-bottom:1px solid #E5E7EB;background:transparent;padding:12px 0;font-size:17px;color:#0F172A;outline:none;transition:border-color .2s ease" style-focus="border-color:#1D4ED8">
+                <option value="">Selecciona un área</option>
+                <option>Derecho Corporativo</option>
+                <option>Litigios y Arbitraje</option>
+                <option>Fusiones y Adquisiciones</option>
+                <option>Propiedad Intelectual</option>
+                <option>Derecho Laboral</option>
+                <option>Derecho Inmobiliario</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin-bottom:8px">Cuéntanos tu caso</label>
+              <textarea rows="3" placeholder="Describe brevemente tu situación" style="width:100%;border:none;border-bottom:1px solid #E5E7EB;background:transparent;padding:12px 0;font-size:17px;color:#0F172A;outline:none;resize:vertical;transition:border-color .2s ease" style-focus="border-color:#1D4ED8"></textarea>
+            </div>
+            <button type="submit" style="margin-top:6px;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:#fff;background:#1D4ED8;padding:14px 30px;border:none;border-radius:999px;transition:background .2s ease" style-hover="background:#1E40AF">Enviar consulta <i data-lucide="arrow-right" style="width:17px;height:17px"></i></button>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="background:#F8FAFC">
+    <div style="max-width:1220px;margin:0 auto;padding:72px 24px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:48px 32px">
+      <div style="min-width:220px">
+        <a href="#top" style="display:flex;align-items:center;gap:11px;margin-bottom:18px">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 4 L28 28 L4 28 Z" stroke="#1D4ED8" stroke-width="2.1" stroke-linejoin="round"/>
+            <path d="M10.5 28 L16 16 L21.5 28" stroke="#1D4ED8" stroke-width="2.1" stroke-linejoin="round"/>
+          </svg>
+          <span style="font-size:18px;letter-spacing:-0.015em"><strong style="font-weight:700">Atlas</strong><span style="font-weight:400;color:#64748B"> Legal</span></span>
+        </a>
+        <p style="font-size:14.5px;line-height:1.6;color:#64748B;margin:0;max-width:260px">Precisión legal y criterio absoluto para los asuntos que definen tu futuro.</p>
+      </div>
+      <div>
+        <h4 style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin:0 0 18px">Áreas</h4>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <a href="#practice" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Corporativo</a>
+          <a href="#practice" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Litigios y Arbitraje</a>
+          <a href="#practice" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Fusiones y Adquisiciones</a>
+          <a href="#practice" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Propiedad Intelectual</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin:0 0 18px">Estudio</h4>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <a href="#attorneys" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Equipo</a>
+          <a href="#results" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Resultados</a>
+          <a href="#process" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Proceso</a>
+          <a href="#contact" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">Carreras</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;margin:0 0 18px">Contacto</h4>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <a href="mailto:contacto@atlaslegal.com" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">contacto@atlaslegal.com</a>
+          <a href="tel:+34910000000" style="font-size:14.5px;color:#334155;border-bottom:1px solid transparent;width:fit-content;transition:border-color .2s ease" style-hover="border-color:#334155">+34 910 000 000</a>
+          <span style="font-size:14.5px;color:#64748B">Madrid · CDMX · Buenos Aires</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1220px;margin:0 auto;padding:24px;border-top:1px solid #E5E7EB;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center">
+      <p style="font-size:13px;color:#94A3B8;margin:0">© 2026 Atlas Legal. Todos los derechos reservados.</p>
+      <div style="display:flex;gap:24px">
+        <a href="#top" style="font-size:13px;color:#94A3B8;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease" style-hover="color:#334155;border-color:#334155">Aviso legal</a>
+        <a href="#top" style="font-size:13px;color:#94A3B8;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease" style-hover="color:#334155;border-color:#334155">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:1400}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, submitted: false };
+
+  componentDidMount() {
+    this.refreshIcons();
+    this.setupReveal();
+  }
+
+  componentDidUpdate() {
+    this.refreshIcons();
+  }
+
+  refreshIcons() {
+    const go = () => {
+      if (window.lucide && window.lucide.createIcons) {
+        try { window.lucide.createIcons(); } catch (e) {}
+      } else {
+        this._iconTimer = setTimeout(go, 120);
+      }
+    };
+    go();
+  }
+
+  setupReveal() {
+    const run = () => {
+      const els = Array.from(document.querySelectorAll('[data-reveal]'));
+      if (!els.length) { setTimeout(run, 120); return; }
+      const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+      if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { show(en.target); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+      // Safety fallback: never leave content hidden
+      setTimeout(() => els.forEach((el) => {
+        if (getComputedStyle(el).opacity === '0') show(el);
+      }), 2000);
+    };
+    run();
+  }
+
+  toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => this.setState({ menuOpen: false });
+  onSubmit = (e) => { e.preventDefault(); this.setState({ submitted: true }); };
+
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      submitted: this.state.submitted,
+      showForm: !this.state.submitted,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      onSubmit: this.onSubmit,
+    };
+  }
+}
+</script>
+</body>
+</html>
